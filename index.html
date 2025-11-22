@@ -479,90 +479,45 @@
         const aiTools = [
             // === 대화형 AI ===
             {
-                name: 'Claude Sonnet 4.5',
+                name: 'Claude',
                 icon: '🧠',
-                description: '2025년 최신 Anthropic의 플래그십 모델. 코딩, 분석, 창작에 최적화된 차세대 AI.',
+                description: 'Anthropic의 최신 AI. 코딩, 분석, 창작에 뛰어난 성능. 복잡한 추론과 장문 대화에 강점.',
                 category: 'chat',
-                tags: ['코딩', '분석', '창작', '최신'],
+                tags: ['코딩', '분석', '창작', '추론'],
                 link: 'https://claude.ai',
                 docs: 'https://docs.anthropic.com'
             },
             {
-                name: 'Claude 3.5 Sonnet',
-                icon: '💎',
-                description: 'Anthropic의 이전 세대 고성능 모델. 균형잡힌 속도와 품질.',
-                category: 'chat',
-                tags: ['코딩', '분석'],
-                link: 'https://claude.ai',
-                docs: 'https://docs.anthropic.com'
-            },
-            {
-                name: 'Claude 3.5 Haiku',
-                icon: '⚡',
-                description: '초고속 응답 모델. 실시간 대화와 빠른 작업에 최적화.',
-                category: 'chat',
-                tags: ['속도', '경량'],
-                link: 'https://claude.ai',
-                docs: 'https://docs.anthropic.com'
-            },
-            {
-                name: 'ChatGPT o1-pro',
+                name: 'ChatGPT',
                 icon: '🤖',
-                description: '2025년 OpenAI 최고급 모델. 복잡한 추론과 문제 해결에 특화.',
+                description: 'OpenAI의 대표 AI 챗봇. 고급 추론, 멀티모달 처리, 창작 및 코딩 지원.',
                 category: 'chat',
-                tags: ['추론', '코딩', '프리미엄'],
+                tags: ['추론', '멀티모달', '범용'],
                 link: 'https://chat.openai.com',
                 docs: 'https://platform.openai.com/docs'
             },
             {
-                name: 'ChatGPT o1',
-                icon: '🎯',
-                description: 'OpenAI의 고급 추론 모델. 수학, 과학, 코딩에 강력.',
-                category: 'chat',
-                tags: ['추론', '과학', '수학'],
-                link: 'https://chat.openai.com',
-                docs: 'https://platform.openai.com/docs'
-            },
-            {
-                name: 'ChatGPT-4o',
-                icon: '🌟',
-                description: 'OpenAI의 멀티모달 모델. 텍스트, 이미지, 음성을 동시에 처리.',
-                category: 'chat',
-                tags: ['멀티모달', '범용'],
-                link: 'https://chat.openai.com',
-                docs: 'https://platform.openai.com/docs'
-            },
-            {
-                name: 'Gemini 2.5 Pro',
+                name: 'Gemini',
                 icon: '🔷',
-                description: '2025년 Google의 최신 플래그십. 대용량 컨텍스트와 멀티모달 지원.',
+                description: 'Google의 최신 AI. 대용량 컨텍스트, 멀티모달 지원, Google 서비스 통합.',
                 category: 'chat',
-                tags: ['멀티모달', '대용량', '최신'],
+                tags: ['멀티모달', '대용량', '통합'],
                 link: 'https://gemini.google.com',
                 docs: 'https://ai.google.dev'
             },
             {
-                name: 'Gemini 2.0 Flash',
-                icon: '⚡',
-                description: 'Google의 초고속 경량 모델. 실시간 애플리케이션에 최적.',
-                category: 'chat',
-                tags: ['속도', '경량', '실시간'],
-                link: 'https://gemini.google.com',
-                docs: 'https://ai.google.dev'
-            },
-            {
-                name: 'DeepSeek V3',
+                name: 'DeepSeek',
                 icon: '🧬',
-                description: '중국 DeepSeek의 2025년 최신 모델. 코딩과 수학 추론에 강력.',
+                description: '중국의 강력한 오픈소스 AI. 코딩과 수학 추론에 특화.',
                 category: 'chat',
                 tags: ['코딩', '오픈소스', '추론'],
                 link: 'https://chat.deepseek.com',
                 docs: 'https://github.com/deepseek-ai'
             },
             {
-                name: 'Qwen 2.5',
+                name: 'Qwen',
                 icon: '🎐',
-                description: 'Alibaba의 최신 오픈소스 모델. 다국어와 코딩 지원 우수.',
+                description: 'Alibaba의 오픈소스 AI. 다국어 지원과 코딩 능력이 뛰어남.',
                 category: 'chat',
                 tags: ['오픈소스', '다국어', '코딩'],
                 link: 'https://qwenlm.github.io',
@@ -580,56 +535,56 @@
 
             // === 이미지 생성 ===
             {
-                name: 'Midjourney v7',
+                name: 'Midjourney',
                 icon: '🎨',
-                description: '2025년 최고의 이미지 생성 AI. 사실적이고 예술적인 이미지 제작.',
+                description: '최고의 이미지 생성 AI. 사실적이고 예술적인 고품질 이미지 제작.',
                 category: 'image',
                 tags: ['아트', '고품질', '창작'],
                 link: 'https://www.midjourney.com',
                 docs: 'https://docs.midjourney.com'
             },
             {
-                name: 'DALL·E 4',
+                name: 'DALL·E',
                 icon: '🖼️',
-                description: 'OpenAI의 최신 이미지 생성 모델. ChatGPT와 완벽 통합.',
+                description: 'OpenAI의 이미지 생성 AI. ChatGPT와 완벽 통합, 직관적인 이미지 편집.',
                 category: 'image',
                 tags: ['통합', '편집', '창작'],
                 link: 'https://openai.com/dall-e',
                 docs: 'https://platform.openai.com/docs'
             },
             {
-                name: 'Stable Diffusion 3.5',
+                name: 'Stable Diffusion',
                 icon: '🌈',
-                description: '오픈소스 이미지 생성의 표준. 로컬 실행 가능.',
+                description: '오픈소스 이미지 생성의 표준. 로컬 실행 가능, 커스터마이징 자유로움.',
                 category: 'image',
                 tags: ['오픈소스', '로컬', '커스텀'],
                 link: 'https://stability.ai',
                 docs: 'https://github.com/Stability-AI'
             },
             {
-                name: 'Imagen 3',
+                name: 'Imagen',
                 icon: '🎭',
-                description: 'Google의 최신 이미지 생성 AI. 텍스트 렌더링에 강력.',
+                description: 'Google의 이미지 생성 AI. 텍스트 렌더링과 포토리얼리즘에 강점.',
                 category: 'image',
-                tags: ['텍스트', '고품질'],
+                tags: ['텍스트', '고품질', 'Google'],
                 link: 'https://deepmind.google/technologies/imagen-3/',
                 docs: 'https://ai.google.dev'
             },
 
             // === 비디오 생성 ===
             {
-                name: 'Runway Gen-3',
+                name: 'Runway',
                 icon: '🎬',
-                description: '최첨단 비디오 생성 AI. 텍스트에서 고품질 비디오 제작.',
+                description: '최첨단 비디오 생성 AI. 텍스트에서 고품질 비디오 제작 및 편집.',
                 category: 'video',
                 tags: ['비디오', '편집', '고품질'],
                 link: 'https://runwayml.com',
                 docs: 'https://help.runwayml.com'
             },
             {
-                name: 'Pika 2.0',
+                name: 'Pika',
                 icon: '📹',
-                description: '혁신적인 비디오 AI. 간단한 프롬프트로 영화 같은 영상 제작.',
+                description: '혁신적인 비디오 생성 AI. 간단한 프롬프트로 영화 같은 영상 제작.',
                 category: 'video',
                 tags: ['비디오', '간편', '창작'],
                 link: 'https://pika.art',
@@ -638,7 +593,7 @@
             {
                 name: 'Sora',
                 icon: '🎥',
-                description: 'OpenAI의 비디오 생성 모델. 1분 이상의 사실적인 영상 생성.',
+                description: 'OpenAI의 비디오 생성 AI. 1분 이상의 사실적이고 창의적인 영상 생성.',
                 category: 'video',
                 tags: ['장편', '사실성', '최신'],
                 link: 'https://openai.com/sora',
@@ -649,7 +604,7 @@
             {
                 name: 'ElevenLabs',
                 icon: '🎙️',
-                description: '세계 최고의 음성 합성 AI. 자연스러운 다국어 음성 생성.',
+                description: '세계 최고의 음성 합성 AI. 자연스러운 다국어 음성 생성 및 음성 복제.',
                 category: 'voice',
                 tags: ['음성', '다국어', 'TTS'],
                 link: 'https://elevenlabs.io',
@@ -658,7 +613,7 @@
             {
                 name: 'OpenAI TTS',
                 icon: '🔊',
-                description: 'OpenAI의 고품질 음성 합성. ChatGPT 음성 모드 기반.',
+                description: 'OpenAI의 고품질 음성 합성. API로 쉽게 통합 가능한 TTS 서비스.',
                 category: 'voice',
                 tags: ['음성', 'API', 'TTS'],
                 link: 'https://platform.openai.com/docs/guides/text-to-speech',
@@ -669,7 +624,7 @@
             {
                 name: 'Gamma',
                 icon: '📊',
-                description: 'AI 기반 프레젠테이션 생성. 텍스트만으로 완성도 높은 슬라이드 제작.',
+                description: 'AI 기반 프레젠테이션 생성. 텍스트만으로 완성도 높은 슬라이드 자동 제작.',
                 category: 'productivity',
                 tags: ['프레젠테이션', '문서', '자동화'],
                 link: 'https://gamma.app',
@@ -678,7 +633,7 @@
             {
                 name: 'Notion AI',
                 icon: '📝',
-                description: 'Notion 통합 AI. 문서 작성, 요약, 번역을 자동화.',
+                description: 'Notion 통합 AI 어시스턴트. 문서 작성, 요약, 번역을 자동화.',
                 category: 'productivity',
                 tags: ['문서', '노트', '자동화'],
                 link: 'https://www.notion.so/product/ai',
@@ -687,7 +642,7 @@
             {
                 name: 'Cursor',
                 icon: '⌨️',
-                description: 'AI 페어 프로그래밍 에디터. 코딩 생산성을 10배 향상.',
+                description: 'AI 페어 프로그래밍 에디터. 코딩 생산성을 획기적으로 향상.',
                 category: 'productivity',
                 tags: ['코딩', '에디터', '생산성'],
                 link: 'https://cursor.sh',
@@ -698,20 +653,11 @@
             {
                 name: 'Perplexity',
                 icon: '🔎',
-                description: '2025년 최고의 AI 검색 엔진. 실시간 정보와 출처 제공.',
+                description: '최고의 AI 검색 엔진. 실시간 정보 검색과 정확한 출처 제공.',
                 category: 'search',
                 tags: ['검색', '실시간', '출처'],
                 link: 'https://www.perplexity.ai',
                 docs: 'https://www.perplexity.ai'
-            },
-            {
-                name: 'Gemini Search',
-                icon: '🌐',
-                description: 'Google의 AI 검색. 검색과 대화형 AI의 완벽한 결합.',
-                category: 'search',
-                tags: ['검색', 'Google', '통합'],
-                link: 'https://gemini.google.com',
-                docs: 'https://support.google.com/gemini'
             },
         ];
 
