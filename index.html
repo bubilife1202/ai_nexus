@@ -570,7 +570,8 @@
 
         function openSearch() {
             searchModal.classList.add('active');
-            searchInput.focus();
+            searchInput.value = '';
+            setTimeout(() => searchInput.focus(), 10);
         }
 
         function closeSearch() {
