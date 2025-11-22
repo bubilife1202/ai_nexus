@@ -1,781 +1,602 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI NEXUS · 2025 최신 AI 디렉토리</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght:700;900&family=Montserrat:wght:600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <title>The Agent Revolution</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        :root {
-            /* Cyberpunk Color Palette */
-            --bg-deep: #050505;
-            --bg-secondary: #0a0a0a;
-            --neon-purple: #a855f7;
-            --neon-blue: #3b82f6;
-            --neon-cyan: #06b6d4;
-            --neon-pink: #ec4899;
-            --neon-green: #10b981;
-            --text-primary: #f5f5f5;
-            --text-secondary: #a3a3a3;
-            --card-bg: rgba(15, 15, 15, 0.85);
-            --border-glow: rgba(168, 85, 247, 0.4);
-        }
-
         body {
-            font-family: 'Inter', sans-serif;
-            background: var(--bg-deep);
-            color: var(--text-primary);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #000000;
+            color: #ffffff;
             overflow-x: hidden;
-            position: relative;
-            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
-        /* Animated Mesh Background */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background:
-                radial-gradient(ellipse 80% 80% at 50% -20%, rgba(168, 85, 247, 0.15), transparent),
-                radial-gradient(ellipse 60% 60% at 80% 60%, rgba(59, 130, 246, 0.1), transparent),
-                radial-gradient(ellipse 70% 70% at 20% 80%, rgba(236, 72, 153, 0.08), transparent);
-            z-index: -1;
-            animation: meshMove 20s ease-in-out infinite;
-        }
-
-        @keyframes meshMove {
-            0%, 100% { transform: scale(1) rotate(0deg); }
-            50% { transform: scale(1.1) rotate(2deg); }
-        }
-
-        /* Grid Pattern Overlay */
-        body::after {
-            content: '';
+        /* Subtle grid background */
+        .grid-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background-image:
-                linear-gradient(rgba(168, 85, 247, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(168, 85, 247, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
-            z-index: -1;
-            opacity: 0.3;
+                linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
+            background-size: 64px 64px;
+            pointer-events: none;
+            z-index: 0;
         }
 
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 24px;
-            position: relative;
-            z-index: 1;
+        /* Aurora gradient background */
+        .aurora {
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(ellipse at 20% 30%, rgba(99, 102, 241, 0.05), transparent 40%),
+                        radial-gradient(ellipse at 80% 70%, rgba(139, 92, 246, 0.05), transparent 40%),
+                        radial-gradient(ellipse at 50% 50%, rgba(59, 130, 246, 0.03), transparent 50%);
+            animation: aurora 30s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
         }
 
-        /* Header */
-        header {
-            padding: 60px 0 40px;
-            text-align: center;
-            position: relative;
+        @keyframes aurora {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(-5%, 5%) rotate(2deg); }
+            66% { transform: translate(5%, -5%) rotate(-2deg); }
         }
 
-        h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: clamp(3rem, 8vw, 5rem);
-            font-weight: 900;
-            background: linear-gradient(135deg, var(--neon-purple), var(--neon-blue), var(--neon-cyan));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: 4px;
-            margin-bottom: 16px;
-            text-transform: uppercase;
-            animation: glowPulse 3s ease-in-out infinite;
-            text-shadow: 0 0 40px rgba(168, 85, 247, 0.5);
-        }
-
-        @keyframes glowPulse {
-            0%, 100% { filter: brightness(1); }
-            50% { filter: brightness(1.2); }
-        }
-
-        .subtitle {
-            font-family: 'Montserrat', sans-serif;
-            font-size: clamp(1rem, 2.5vw, 1.25rem);
-            color: var(--text-secondary);
-            letter-spacing: 2px;
-            margin-bottom: 48px;
-        }
-
-        /* Search Bar */
-        .search-container {
-            margin-bottom: 48px;
-            position: relative;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .search-bar {
+        /* Search modal */
+        .search-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            padding: 18px 24px;
-            background: var(--card-bg);
-            border: 1px solid var(--border-glow);
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(12px);
+            display: none;
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 15vh;
+            z-index: 1000;
+            animation: fadeIn 0.2s ease;
+        }
+
+        .search-modal.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .search-container {
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 20px 24px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 12px;
-            color: var(--text-primary);
-            font-size: 16px;
-            font-family: 'Inter', sans-serif;
+            color: white;
+            font-size: 18px;
             outline: none;
             transition: all 0.3s ease;
-            box-shadow: 0 0 20px rgba(168, 85, 247, 0.2);
         }
 
-        .search-bar:focus {
-            border-color: var(--neon-purple);
-            box-shadow: 0 0 30px rgba(168, 85, 247, 0.4), 0 0 60px rgba(168, 85, 247, 0.2);
-            transform: translateY(-2px);
+        .search-input:focus {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(139, 92, 246, 0.5);
+            box-shadow: 0 0 40px rgba(139, 92, 246, 0.2);
         }
 
-        .search-bar::placeholder {
-            color: var(--text-secondary);
+        .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.3);
         }
 
-        /* Filter Pills */
-        .filter-container {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 48px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .filter-pill {
-            padding: 10px 24px;
-            background: var(--card-bg);
-            border: 1px solid rgba(168, 85, 247, 0.3);
-            border-radius: 24px;
-            color: var(--text-secondary);
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .filter-pill:hover {
-            border-color: var(--neon-purple);
-            color: var(--neon-purple);
-            box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
-        }
-
-        .filter-pill.active {
-            background: linear-gradient(135deg, var(--neon-purple), var(--neon-blue));
-            color: white;
-            border-color: transparent;
-            box-shadow: 0 0 30px rgba(168, 85, 247, 0.5);
-        }
-
-        /* Grid Layout */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-            gap: 24px;
-            margin-bottom: 80px;
-        }
-
-        /* Holographic Card */
-        .card {
-            background: var(--card-bg);
-            border: 1px solid rgba(168, 85, 247, 0.3);
+        /* Card styles */
+        .tool-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 16px;
             padding: 28px;
             position: relative;
             overflow: hidden;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
-            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 200px;
         }
 
-        .card::before {
+        .tool-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(59, 130, 246, 0.1));
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+                        rgba(139, 92, 246, 0.1), transparent 50%);
             opacity: 0;
             transition: opacity 0.4s ease;
+            pointer-events: none;
         }
 
-        .card:hover {
-            border-color: var(--neon-purple);
-            box-shadow:
-                0 0 40px rgba(168, 85, 247, 0.4),
-                0 0 80px rgba(168, 85, 247, 0.2),
-                inset 0 0 60px rgba(168, 85, 247, 0.1);
-            transform: translateY(-8px) scale(1.02);
+        .tool-card:hover {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(139, 92, 246, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(139, 92, 246, 0.2),
+                        0 0 1px rgba(139, 92, 246, 0.5);
         }
 
-        .card:hover::before {
+        .tool-card:hover::before {
             opacity: 1;
         }
 
-        .card-header {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 16px;
-            position: relative;
-            z-index: 1;
+        /* Hero cards (2x size) */
+        .hero-card {
+            min-height: 240px;
         }
 
-        .card-icon {
-            width: 56px;
-            height: 56px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            border: 1px solid rgba(168, 85, 247, 0.4);
-            background: rgba(15, 15, 15, 0.6);
-            transition: all 0.3s ease;
-        }
-
-        .card:hover .card-icon {
-            transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 0 20px rgba(168, 85, 247, 0.6);
-        }
-
-        .card-title {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 22px;
-            font-weight: 700;
-            color: var(--text-primary);
-            letter-spacing: 1px;
-        }
-
-        .card-description {
-            font-size: 15px;
-            line-height: 1.7;
-            color: var(--text-secondary);
-            margin-bottom: 20px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .card-tags {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .tag {
-            padding: 6px 14px;
-            background: rgba(168, 85, 247, 0.15);
-            border: 1px solid rgba(168, 85, 247, 0.3);
+        /* Badge */
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(99, 102, 241, 0.2));
+            border: 1px solid rgba(139, 92, 246, 0.3);
             border-radius: 6px;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 600;
-            color: var(--neon-purple);
             text-transform: uppercase;
             letter-spacing: 0.5px;
-        }
-
-        .card-footer {
-            display: flex;
-            gap: 12px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .btn {
-            flex: 1;
-            padding: 12px 20px;
-            background: linear-gradient(135deg, var(--neon-purple), var(--neon-blue));
-            border: none;
-            border-radius: 8px;
-            color: white;
-            font-weight: 600;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            text-decoration: none;
-            display: inline-block;
-            text-align: center;
-        }
-
-        .btn:hover {
-            box-shadow: 0 0 30px rgba(168, 85, 247, 0.6);
-            transform: translateY(-2px);
-        }
-
-        .btn-secondary {
-            background: rgba(168, 85, 247, 0.2);
-            border: 1px solid var(--neon-purple);
-        }
-
-        /* Category Badges */
-        .category-badge {
             position: absolute;
             top: 16px;
             right: 16px;
-            padding: 6px 12px;
-            background: rgba(168, 85, 247, 0.2);
-            border: 1px solid var(--neon-purple);
-            border-radius: 6px;
+        }
+
+        .badge.new {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(22, 163, 74, 0.2));
+            border-color: rgba(34, 197, 94, 0.3);
+            color: #4ade80;
+        }
+
+        .badge.hot {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(220, 38, 38, 0.2));
+            border-color: rgba(239, 68, 68, 0.3);
+            color: #f87171;
+        }
+
+        .badge.trend {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(37, 99, 235, 0.2));
+            border-color: rgba(59, 130, 246, 0.3);
+            color: #60a5fa;
+        }
+
+        /* Section header */
+        .section-header {
             font-size: 11px;
-            font-weight: 700;
-            color: var(--neon-purple);
+            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            z-index: 2;
+            letter-spacing: 2px;
+            color: rgba(255, 255, 255, 0.4);
+            margin-bottom: 20px;
+            padding-left: 4px;
         }
 
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 40px 0;
-            color: var(--text-secondary);
-            font-size: 14px;
-            border-top: 1px solid rgba(168, 85, 247, 0.2);
+        /* Bento Grid */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+            margin-bottom: 60px;
         }
 
-        footer a {
-            color: var(--neon-purple);
-            text-decoration: none;
-            transition: all 0.3s ease;
+        .span-2 {
+            grid-column: span 2;
         }
 
-        footer a:hover {
-            color: var(--neon-cyan);
-            text-shadow: 0 0 10px rgba(168, 85, 247, 0.6);
-        }
-
-        /* Responsive */
         @media (max-width: 768px) {
-            .grid {
+            .span-2 {
+                grid-column: span 1;
+            }
+
+            .bento-grid {
                 grid-template-columns: 1fr;
             }
+        }
 
-            h1 {
-                font-size: 2.5rem;
-                letter-spacing: 2px;
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #000;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Keyboard hint */
+        .kbd {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            font-size: 12px;
+            font-family: 'SF Mono', Monaco, monospace;
+            color: rgba(255, 255, 255, 0.6);
+            margin: 0 4px;
+        }
+
+        /* Fade in animation */
+        .fade-in {
+            animation: fadeInUp 0.6s ease forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
             }
-
-            .filter-container {
-                gap: 8px;
-            }
-
-            .filter-pill {
-                padding: 8px 16px;
-                font-size: 12px;
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
 
-        /* No Results Message */
-        .no-results {
-            text-align: center;
-            padding: 80px 20px;
-            color: var(--text-secondary);
-            font-size: 18px;
-            display: none;
-        }
-
-        .no-results.show {
-            display: block;
-        }
-
-        /* Loading Animation */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .card {
-            animation: fadeIn 0.6s ease forwards;
-        }
-
-        /* Stat Counter */
-        .stats {
-            text-align: center;
-            margin-bottom: 40px;
-            font-size: 14px;
-            color: var(--text-secondary);
-            font-weight: 600;
-            letter-spacing: 1px;
-        }
-
-        .stats span {
-            color: var(--neon-purple);
-            font-weight: 700;
-        }
+        /* Stagger animation */
+        .tool-card:nth-child(1) { animation-delay: 0.05s; }
+        .tool-card:nth-child(2) { animation-delay: 0.1s; }
+        .tool-card:nth-child(3) { animation-delay: 0.15s; }
+        .tool-card:nth-child(4) { animation-delay: 0.2s; }
+        .tool-card:nth-child(5) { animation-delay: 0.25s; }
+        .tool-card:nth-child(6) { animation-delay: 0.3s; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>AI NEXUS</h1>
-            <p class="subtitle">2025년 최신 AI 생태계 디렉토리</p>
-        </header>
+    <!-- Aurora background -->
+    <div class="aurora"></div>
+    <div class="grid-bg"></div>
 
+    <!-- Search Modal -->
+    <div class="search-modal" id="searchModal">
         <div class="search-container">
             <input
                 type="text"
-                class="search-bar"
+                class="search-input"
                 id="searchInput"
-                placeholder="🔍 AI 도구를 검색하세요... (예: ChatGPT, Claude, Midjourney)"
+                placeholder="Search tools..."
                 autocomplete="off"
             >
+            <div class="mt-4 text-center text-sm text-gray-500">
+                Press <span class="kbd">ESC</span> to close
+            </div>
         </div>
+    </div>
 
-        <div class="filter-container">
-            <div class="filter-pill active" data-category="all">전체</div>
-            <div class="filter-pill" data-category="chat">대화형 AI</div>
-            <div class="filter-pill" data-category="image">이미지 생성</div>
-            <div class="filter-pill" data-category="video">비디오 생성</div>
-            <div class="filter-pill" data-category="voice">음성 AI</div>
-            <div class="filter-pill" data-category="productivity">생산성</div>
-            <div class="filter-pill" data-category="search">AI 검색</div>
-        </div>
+    <!-- Main Container -->
+    <div class="relative z-10 max-w-7xl mx-auto px-6 py-20">
+        <!-- Header -->
+        <header class="mb-20 fade-in">
+            <h1 class="text-6xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-white via-purple-200 to-blue-200 bg-clip-text text-transparent">
+                The Agent Revolution
+            </h1>
+            <p class="text-lg text-gray-400 mb-6">
+                A curated launchpad for power users who build the future
+            </p>
+            <div class="flex items-center gap-4 text-sm text-gray-500">
+                <span>Press <span class="kbd">Ctrl</span> + <span class="kbd">K</span> to search</span>
+                <span class="opacity-30">|</span>
+                <span>or <span class="kbd">/</span></span>
+            </div>
+        </header>
 
-        <div class="stats">
-            총 <span id="totalCount">0</span>개의 AI 도구 · <span id="visibleCount">0</span>개 표시 중
-        </div>
+        <!-- Section 1: Super Agents -->
+        <section class="mb-16">
+            <div class="section-header fade-in">Super Agents · Autonomous Execution</div>
+            <div class="bento-grid" id="superAgents"></div>
+        </section>
 
-        <div class="grid" id="aiGrid"></div>
+        <!-- Section 2: Visual & Motion -->
+        <section class="mb-16">
+            <div class="section-header fade-in">Visual & Motion · Creative Engines</div>
+            <div class="bento-grid" id="visualEngines"></div>
+        </section>
 
-        <div class="no-results" id="noResults">
-            <p>😢 검색 결과가 없습니다.</p>
-            <p style="margin-top: 12px; font-size: 14px;">다른 키워드로 검색해보세요.</p>
-        </div>
+        <!-- Section 3: Deep Research -->
+        <section class="mb-16">
+            <div class="section-header fade-in">Deep Research · Knowledge Mining</div>
+            <div class="bento-grid" id="deepResearch"></div>
+        </section>
 
-        <footer>
-            <p>Made with 💜 by AI NEXUS Team · 2025 하반기 최신 라인업</p>
-            <p style="margin-top: 12px; font-size: 12px;">데이터는 매월 업데이트됩니다 · 최종 업데이트: 2025.11</p>
+        <!-- Section 4: Foundation Models -->
+        <section class="mb-16">
+            <div class="section-header fade-in">Foundation Models · Core Intelligence</div>
+            <div class="bento-grid" id="foundationModels"></div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="text-center text-sm text-gray-600 mt-32 pb-12 fade-in">
+            <p>Built for those who shape tomorrow · 2025</p>
         </footer>
     </div>
 
     <script>
-        // AI Tools Database - 2025년 최신 라인업
-        const aiTools = [
-            // === 대화형 AI ===
-            {
-                name: 'Claude',
-                icon: '🧠',
-                description: 'Anthropic의 최신 AI. 코딩, 분석, 창작에 뛰어난 성능. 복잡한 추론과 장문 대화에 강점.',
-                category: 'chat',
-                tags: ['코딩', '분석', '창작', '추론'],
-                link: 'https://claude.ai',
-                docs: 'https://docs.anthropic.com'
-            },
-            {
-                name: 'ChatGPT',
-                icon: '🤖',
-                description: 'OpenAI의 대표 AI 챗봇. 고급 추론, 멀티모달 처리, 창작 및 코딩 지원.',
-                category: 'chat',
-                tags: ['추론', '멀티모달', '범용'],
-                link: 'https://chat.openai.com',
-                docs: 'https://platform.openai.com/docs'
-            },
-            {
-                name: 'Gemini',
-                icon: '🔷',
-                description: 'Google의 최신 AI. 대용량 컨텍스트, 멀티모달 지원, Google 서비스 통합.',
-                category: 'chat',
-                tags: ['멀티모달', '대용량', '통합'],
-                link: 'https://gemini.google.com',
-                docs: 'https://ai.google.dev'
-            },
-            {
-                name: 'DeepSeek',
-                icon: '🧬',
-                description: '중국의 강력한 오픈소스 AI. 코딩과 수학 추론에 특화.',
-                category: 'chat',
-                tags: ['코딩', '오픈소스', '추론'],
-                link: 'https://chat.deepseek.com',
-                docs: 'https://github.com/deepseek-ai'
-            },
-            {
-                name: 'Qwen',
-                icon: '🎐',
-                description: 'Alibaba의 오픈소스 AI. 다국어 지원과 코딩 능력이 뛰어남.',
-                category: 'chat',
-                tags: ['오픈소스', '다국어', '코딩'],
-                link: 'https://qwenlm.github.io',
-                docs: 'https://github.com/QwenLM'
-            },
-            {
-                name: 'Minimax',
-                icon: '🏮',
-                description: '중국의 혁신적인 멀티모달 AI. 음성, 텍스트, 이미지 통합 처리.',
-                category: 'chat',
-                tags: ['멀티모달', '음성', '중국'],
-                link: 'https://www.minimax.io',
-                docs: 'https://www.minimax.io'
-            },
+        // Data
+        const tools = {
+            superAgents: [
+                {
+                    name: 'Antigravity',
+                    description: "Google's next-gen agent IDE",
+                    url: 'https://antigravity.google',
+                    icon: '🚀',
+                    badge: 'new',
+                    hero: true
+                },
+                {
+                    name: 'Manus',
+                    description: 'Fully autonomous agent that plans and executes',
+                    url: 'https://manus.im',
+                    icon: '🤖',
+                    badge: 'hot',
+                    hero: true
+                },
+                {
+                    name: 'Bolt',
+                    description: 'Full-stack app development in browser',
+                    url: 'https://bolt.new',
+                    icon: '⚡',
+                },
+                {
+                    name: 'Lovable',
+                    description: 'From idea to app in minutes',
+                    url: 'https://lovable.dev',
+                    icon: '💜',
+                },
+                {
+                    name: 'Skywork',
+                    description: "Kunlun Tech's powerhouse agent",
+                    url: 'https://skywork.ai',
+                    icon: '🌌',
+                },
+                {
+                    name: 'MultiOn',
+                    description: 'AI that browses the web for you',
+                    url: 'https://www.multion.ai',
+                    icon: '🌐',
+                }
+            ],
+            visualEngines: [
+                {
+                    name: 'Hailuo AI',
+                    description: "MiniMax's groundbreaking video generator",
+                    url: 'https://hailuoai.com',
+                    icon: '🎬',
+                    badge: 'trend',
+                    hero: true
+                },
+                {
+                    name: 'Kling AI',
+                    description: 'Hollywood-grade high-res video model',
+                    url: 'https://klingai.com',
+                    icon: '🎥',
+                },
+                {
+                    name: 'Midjourney',
+                    description: 'The undisputed image generation leader',
+                    url: 'https://www.midjourney.com',
+                    icon: '🎨',
+                },
+                {
+                    name: 'Recraft',
+                    description: 'Vector and design editing redefined',
+                    url: 'https://recraft.ai',
+                    icon: '✨',
+                },
+                {
+                    name: 'Runway',
+                    description: 'The standard for video generation',
+                    url: 'https://runwayml.com',
+                    icon: '🎞️',
+                }
+            ],
+            deepResearch: [
+                {
+                    name: 'Genspark',
+                    description: 'AI-powered custom curation engine',
+                    url: 'https://genspark.ai',
+                    icon: '✨',
+                },
+                {
+                    name: 'Felo',
+                    description: 'Real-time multilingual search',
+                    url: 'https://felo.ai',
+                    icon: '🌍',
+                },
+                {
+                    name: 'Perplexity',
+                    description: 'Deep research with citations',
+                    url: 'https://www.perplexity.ai',
+                    icon: '🔍',
+                },
+                {
+                    name: 'NotebookLM',
+                    description: 'Turn your docs into podcasts',
+                    url: 'https://notebooklm.google',
+                    icon: '📚',
+                }
+            ],
+            foundationModels: [
+                {
+                    name: 'ChatGPT',
+                    description: 'OpenAI',
+                    url: 'https://chatgpt.com',
+                    icon: '🤖',
+                },
+                {
+                    name: 'Claude',
+                    description: 'Anthropic',
+                    url: 'https://claude.ai',
+                    icon: '🧠',
+                },
+                {
+                    name: 'Gemini',
+                    description: 'Google',
+                    url: 'https://gemini.google.com',
+                    icon: '💎',
+                },
+                {
+                    name: 'MiniMax',
+                    description: 'MiniMax Platform',
+                    url: 'https://minimax.io',
+                    icon: '🏮',
+                }
+            ]
+        };
 
-            // === 이미지 생성 ===
-            {
-                name: 'Midjourney',
-                icon: '🎨',
-                description: '최고의 이미지 생성 AI. 사실적이고 예술적인 고품질 이미지 제작.',
-                category: 'image',
-                tags: ['아트', '고품질', '창작'],
-                link: 'https://www.midjourney.com',
-                docs: 'https://docs.midjourney.com'
-            },
-            {
-                name: 'DALL·E',
-                icon: '🖼️',
-                description: 'OpenAI의 이미지 생성 AI. ChatGPT와 완벽 통합, 직관적인 이미지 편집.',
-                category: 'image',
-                tags: ['통합', '편집', '창작'],
-                link: 'https://openai.com/dall-e',
-                docs: 'https://platform.openai.com/docs'
-            },
-            {
-                name: 'Stable Diffusion',
-                icon: '🌈',
-                description: '오픈소스 이미지 생성의 표준. 로컬 실행 가능, 커스터마이징 자유로움.',
-                category: 'image',
-                tags: ['오픈소스', '로컬', '커스텀'],
-                link: 'https://stability.ai',
-                docs: 'https://github.com/Stability-AI'
-            },
-            {
-                name: 'Imagen',
-                icon: '🎭',
-                description: 'Google의 이미지 생성 AI. 텍스트 렌더링과 포토리얼리즘에 강점.',
-                category: 'image',
-                tags: ['텍스트', '고품질', 'Google'],
-                link: 'https://deepmind.google/technologies/imagen-3/',
-                docs: 'https://ai.google.dev'
-            },
-
-            // === 비디오 생성 ===
-            {
-                name: 'Runway',
-                icon: '🎬',
-                description: '최첨단 비디오 생성 AI. 텍스트에서 고품질 비디오 제작 및 편집.',
-                category: 'video',
-                tags: ['비디오', '편집', '고품질'],
-                link: 'https://runwayml.com',
-                docs: 'https://help.runwayml.com'
-            },
-            {
-                name: 'Pika',
-                icon: '📹',
-                description: '혁신적인 비디오 생성 AI. 간단한 프롬프트로 영화 같은 영상 제작.',
-                category: 'video',
-                tags: ['비디오', '간편', '창작'],
-                link: 'https://pika.art',
-                docs: 'https://pika.art'
-            },
-            {
-                name: 'Sora',
-                icon: '🎥',
-                description: 'OpenAI의 비디오 생성 AI. 1분 이상의 사실적이고 창의적인 영상 생성.',
-                category: 'video',
-                tags: ['장편', '사실성', '최신'],
-                link: 'https://openai.com/sora',
-                docs: 'https://openai.com/sora'
-            },
-
-            // === 음성 AI ===
-            {
-                name: 'ElevenLabs',
-                icon: '🎙️',
-                description: '세계 최고의 음성 합성 AI. 자연스러운 다국어 음성 생성 및 음성 복제.',
-                category: 'voice',
-                tags: ['음성', '다국어', 'TTS'],
-                link: 'https://elevenlabs.io',
-                docs: 'https://docs.elevenlabs.io'
-            },
-            {
-                name: 'OpenAI TTS',
-                icon: '🔊',
-                description: 'OpenAI의 고품질 음성 합성. API로 쉽게 통합 가능한 TTS 서비스.',
-                category: 'voice',
-                tags: ['음성', 'API', 'TTS'],
-                link: 'https://platform.openai.com/docs/guides/text-to-speech',
-                docs: 'https://platform.openai.com/docs'
-            },
-
-            // === 생산성 도구 ===
-            {
-                name: 'Gamma',
-                icon: '📊',
-                description: 'AI 기반 프레젠테이션 생성. 텍스트만으로 완성도 높은 슬라이드 자동 제작.',
-                category: 'productivity',
-                tags: ['프레젠테이션', '문서', '자동화'],
-                link: 'https://gamma.app',
-                docs: 'https://gamma.app'
-            },
-            {
-                name: 'Notion AI',
-                icon: '📝',
-                description: 'Notion 통합 AI 어시스턴트. 문서 작성, 요약, 번역을 자동화.',
-                category: 'productivity',
-                tags: ['문서', '노트', '자동화'],
-                link: 'https://www.notion.so/product/ai',
-                docs: 'https://www.notion.so/help/guides/category/notion-ai'
-            },
-            {
-                name: 'Cursor',
-                icon: '⌨️',
-                description: 'AI 페어 프로그래밍 에디터. 코딩 생산성을 획기적으로 향상.',
-                category: 'productivity',
-                tags: ['코딩', '에디터', '생산성'],
-                link: 'https://cursor.sh',
-                docs: 'https://docs.cursor.sh'
-            },
-
-            // === AI 검색 ===
-            {
-                name: 'Perplexity',
-                icon: '🔎',
-                description: '최고의 AI 검색 엔진. 실시간 정보 검색과 정확한 출처 제공.',
-                category: 'search',
-                tags: ['검색', '실시간', '출처'],
-                link: 'https://www.perplexity.ai',
-                docs: 'https://www.perplexity.ai'
-            },
-        ];
-
-        // DOM Elements
-        const searchInput = document.getElementById('searchInput');
-        const aiGrid = document.getElementById('aiGrid');
-        const noResults = document.getElementById('noResults');
-        const filterPills = document.querySelectorAll('.filter-pill');
-        const totalCount = document.getElementById('totalCount');
-        const visibleCount = document.getElementById('visibleCount');
-
-        let currentFilter = 'all';
-        let currentSearch = '';
-
-        // Initialize
-        function init() {
-            renderCards(aiTools);
-            updateStats(aiTools.length, aiTools.length);
+        // Render cards
+        function renderCards(container, tools) {
+            const grid = document.getElementById(container);
+            grid.innerHTML = tools.map(tool => `
+                <a href="${tool.url}" target="_blank" rel="noopener noreferrer"
+                   class="tool-card fade-in ${tool.hero ? 'hero-card span-2' : ''}"
+                   onmousemove="handleMouseMove(event)">
+                    ${tool.badge ? `<span class="badge ${tool.badge}">${tool.badge}</span>` : ''}
+                    <div>
+                        <div class="text-4xl mb-4">${tool.icon}</div>
+                        <h3 class="text-xl font-semibold mb-2">${tool.name}</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">${tool.description}</p>
+                    </div>
+                    <div class="mt-4 flex items-center text-xs text-gray-500">
+                        <i class="fas fa-external-link-alt mr-2"></i>
+                        <span>${new URL(tool.url).hostname}</span>
+                    </div>
+                </a>
+            `).join('');
         }
 
-        // Render Cards
-        function renderCards(tools) {
-            if (tools.length === 0) {
-                aiGrid.innerHTML = '';
-                noResults.classList.add('show');
-                updateStats(aiTools.length, 0);
+        // Mouse move effect
+        function handleMouseMove(e) {
+            const rect = e.currentTarget.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width) * 100;
+            const y = ((e.clientY - rect.top) / rect.height) * 100;
+            e.currentTarget.style.setProperty('--mouse-x', `${x}%`);
+            e.currentTarget.style.setProperty('--mouse-y', `${y}%`);
+        }
+
+        // Search functionality
+        const searchModal = document.getElementById('searchModal');
+        const searchInput = document.getElementById('searchInput');
+
+        function openSearch() {
+            searchModal.classList.add('active');
+            searchInput.focus();
+        }
+
+        function closeSearch() {
+            searchModal.classList.remove('active');
+            searchInput.value = '';
+            renderAllCards();
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            // Ctrl+K or /
+            if ((e.ctrlKey && e.key === 'k') || (e.key === '/' && !searchModal.classList.contains('active'))) {
+                e.preventDefault();
+                openSearch();
+            }
+
+            // ESC
+            if (e.key === 'Escape') {
+                closeSearch();
+            }
+        });
+
+        // Click outside to close
+        searchModal.addEventListener('click', (e) => {
+            if (e.target === searchModal) {
+                closeSearch();
+            }
+        });
+
+        // Search filter
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            const allTools = [
+                ...tools.superAgents,
+                ...tools.visualEngines,
+                ...tools.deepResearch,
+                ...tools.foundationModels
+            ];
+
+            if (query === '') {
+                renderAllCards();
                 return;
             }
 
-            noResults.classList.remove('show');
-            aiGrid.innerHTML = tools.map((tool, index) => `
-                <div class="card" style="animation-delay: ${index * 0.05}s">
-                    <div class="category-badge">${getCategoryName(tool.category)}</div>
-                    <div class="card-header">
-                        <div class="card-icon">${tool.icon}</div>
-                        <h3 class="card-title">${tool.name}</h3>
-                    </div>
-                    <p class="card-description">${tool.description}</p>
-                    <div class="card-tags">
-                        ${tool.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
-                    </div>
-                    <div class="card-footer">
-                        <a href="${tool.link}" target="_blank" class="btn">방문하기</a>
-                        ${tool.docs ? `<a href="${tool.docs}" target="_blank" class="btn btn-secondary">문서</a>` : ''}
-                    </div>
-                </div>
-            `).join('');
-            updateStats(aiTools.length, tools.length);
-        }
+            const filtered = allTools.filter(tool =>
+                tool.name.toLowerCase().includes(query) ||
+                tool.description.toLowerCase().includes(query)
+            );
 
-        // Get Category Name in Korean
-        function getCategoryName(category) {
-            const names = {
-                'chat': '대화형',
-                'image': '이미지',
-                'video': '비디오',
-                'voice': '음성',
-                'productivity': '생산성',
-                'search': '검색'
+            // Render filtered results
+            const sections = {
+                superAgents: filtered.filter(t => tools.superAgents.includes(t)),
+                visualEngines: filtered.filter(t => tools.visualEngines.includes(t)),
+                deepResearch: filtered.filter(t => tools.deepResearch.includes(t)),
+                foundationModels: filtered.filter(t => tools.foundationModels.includes(t))
             };
-            return names[category] || category;
-        }
 
-        // Filter Logic
-        function filterTools() {
-            let filtered = aiTools;
-
-            // Category filter
-            if (currentFilter !== 'all') {
-                filtered = filtered.filter(tool => tool.category === currentFilter);
-            }
-
-            // Search filter
-            if (currentSearch) {
-                const search = currentSearch.toLowerCase();
-                filtered = filtered.filter(tool =>
-                    tool.name.toLowerCase().includes(search) ||
-                    tool.description.toLowerCase().includes(search) ||
-                    tool.tags.some(tag => tag.toLowerCase().includes(search))
-                );
-            }
-
-            renderCards(filtered);
-        }
-
-        // Update Stats
-        function updateStats(total, visible) {
-            totalCount.textContent = total;
-            visibleCount.textContent = visible;
-        }
-
-        // Event Listeners
-        searchInput.addEventListener('input', (e) => {
-            currentSearch = e.target.value;
-            filterTools();
+            renderCards('superAgents', sections.superAgents);
+            renderCards('visualEngines', sections.visualEngines);
+            renderCards('deepResearch', sections.deepResearch);
+            renderCards('foundationModels', sections.foundationModels);
         });
 
-        filterPills.forEach(pill => {
-            pill.addEventListener('click', () => {
-                // Update active state
-                filterPills.forEach(p => p.classList.remove('active'));
-                pill.classList.add('active');
+        // Render all cards
+        function renderAllCards() {
+            renderCards('superAgents', tools.superAgents);
+            renderCards('visualEngines', tools.visualEngines);
+            renderCards('deepResearch', tools.deepResearch);
+            renderCards('foundationModels', tools.foundationModels);
+        }
 
-                // Update filter
-                currentFilter = pill.dataset.category;
-                filterTools();
-            });
-        });
-
-        // Prevent card click when clicking buttons
-        document.addEventListener('click', (e) => {
-            if (e.target.classList.contains('btn')) {
-                e.stopPropagation();
-            }
-        });
-
-        // Initialize on load
-        init();
+        // Initialize
+        renderAllCards();
     </script>
 </body>
 </html>
