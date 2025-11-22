@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI NEXUS · 2025 최신 AI 디렉토리</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght:700;900&family=Montserrat:wght:600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Cyberpunk Color Palette */
+            --bg-deep: #050505;
+            --bg-secondary: #0a0a0a;
+            --neon-purple: #a855f7;
+            --neon-blue: #3b82f6;
+            --neon-cyan: #06b6d4;
+            --neon-pink: #ec4899;
+            --neon-green: #10b981;
+            --text-primary: #f5f5f5;
+            --text-secondary: #a3a3a3;
+            --card-bg: rgba(15, 15, 15, 0.85);
+            --border-glow: rgba(168, 85, 247, 0.4);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-deep);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* Animated Mesh Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(ellipse 80% 80% at 50% -20%, rgba(168, 85, 247, 0.15), transparent),
+                radial-gradient(ellipse 60% 60% at 80% 60%, rgba(59, 130, 246, 0.1), transparent),
+                radial-gradient(ellipse 70% 70% at 20% 80%, rgba(236, 72, 153, 0.08), transparent);
+            z-index: -1;
+            animation: meshMove 20s ease-in-out infinite;
+        }
+
+        @keyframes meshMove {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(2deg); }
+        }
+
+        /* Grid Pattern Overlay */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(168, 85, 247, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(168, 85, 247, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header */
+        header {
+            padding: 60px 0 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-blue), var(--neon-cyan));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 4px;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            animation: glowPulse 3s ease-in-out infinite;
+            text-shadow: 0 0 40px rgba(168, 85, 247, 0.5);
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.2); }
+        }
+
+        .subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
+            color: var(--text-secondary);
+            letter-spacing: 2px;
+            margin-bottom: 48px;
+        }
+
+        /* Search Bar */
+        .search-container {
+            margin-bottom: 48px;
+            position: relative;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 18px 24px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-glow);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 16px;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.2);
+        }
+
+        .search-bar:focus {
+            border-color: var(--neon-purple);
+            box-shadow: 0 0 30px rgba(168, 85, 247, 0.4), 0 0 60px rgba(168, 85, 247, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .search-bar::placeholder {
+            color: var(--text-secondary);
+        }
+
+        /* Filter Pills */
+        .filter-container {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 48px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-pill {
+            padding: 10px 24px;
+            background: var(--card-bg);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            border-radius: 24px;
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .filter-pill:hover {
+            border-color: var(--neon-purple);
+            color: var(--neon-purple);
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
+        }
+
+        .filter-pill.active {
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-blue));
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 0 30px rgba(168, 85, 247, 0.5);
+        }
+
+        /* Grid Layout */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 24px;
+            margin-bottom: 80px;
+        }
+
+        /* Holographic Card */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            border-radius: 16px;
+            padding: 28px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(59, 130, 246, 0.1));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .card:hover {
+            border-color: var(--neon-purple);
+            box-shadow:
+                0 0 40px rgba(168, 85, 247, 0.4),
+                0 0 80px rgba(168, 85, 247, 0.2),
+                inset 0 0 60px rgba(168, 85, 247, 0.1);
+            transform: translateY(-8px) scale(1.02);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            border: 1px solid rgba(168, 85, 247, 0.4);
+            background: rgba(15, 15, 15, 0.6);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover .card-icon {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.6);
+        }
+
+        .card-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: 1px;
+        }
+
+        .card-description {
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .tag {
+            padding: 6px 14px;
+            background: rgba(168, 85, 247, 0.15);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--neon-purple);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .card-footer {
+            display: flex;
+            gap: 12px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-blue));
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn:hover {
+            box-shadow: 0 0 30px rgba(168, 85, 247, 0.6);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: rgba(168, 85, 247, 0.2);
+            border: 1px solid var(--neon-purple);
+        }
+
+        /* Category Badges */
+        .category-badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            padding: 6px 12px;
+            background: rgba(168, 85, 247, 0.2);
+            border: 1px solid var(--neon-purple);
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--neon-purple);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 2;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: var(--text-secondary);
+            font-size: 14px;
+            border-top: 1px solid rgba(168, 85, 247, 0.2);
+        }
+
+        footer a {
+            color: var(--neon-purple);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        footer a:hover {
+            color: var(--neon-cyan);
+            text-shadow: 0 0 10px rgba(168, 85, 247, 0.6);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+                letter-spacing: 2px;
+            }
+
+            .filter-container {
+                gap: 8px;
+            }
+
+            .filter-pill {
+                padding: 8px 16px;
+                font-size: 12px;
+            }
+        }
+
+        /* No Results Message */
+        .no-results {
+            text-align: center;
+            padding: 80px 20px;
+            color: var(--text-secondary);
+            font-size: 18px;
+            display: none;
+        }
+
+        .no-results.show {
+            display: block;
+        }
+
+        /* Loading Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        /* Stat Counter */
+        .stats {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 14px;
+            color: var(--text-secondary);
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .stats span {
+            color: var(--neon-purple);
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>AI NEXUS</h1>
+            <p class="subtitle">2025년 최신 AI 생태계 디렉토리</p>
+        </header>
+
+        <div class="search-container">
+            <input
+                type="text"
+                class="search-bar"
+                id="searchInput"
+                placeholder="🔍 AI 도구를 검색하세요... (예: ChatGPT, Claude, Midjourney)"
+                autocomplete="off"
+            >
+        </div>
+
+        <div class="filter-container">
+            <div class="filter-pill active" data-category="all">전체</div>
+            <div class="filter-pill" data-category="chat">대화형 AI</div>
+            <div class="filter-pill" data-category="image">이미지 생성</div>
+            <div class="filter-pill" data-category="video">비디오 생성</div>
+            <div class="filter-pill" data-category="voice">음성 AI</div>
+            <div class="filter-pill" data-category="productivity">생산성</div>
+            <div class="filter-pill" data-category="search">AI 검색</div>
+        </div>
+
+        <div class="stats">
+            총 <span id="totalCount">0</span>개의 AI 도구 · <span id="visibleCount">0</span>개 표시 중
+        </div>
+
+        <div class="grid" id="aiGrid"></div>
+
+        <div class="no-results" id="noResults">
+            <p>😢 검색 결과가 없습니다.</p>
+            <p style="margin-top: 12px; font-size: 14px;">다른 키워드로 검색해보세요.</p>
+        </div>
+
+        <footer>
+            <p>Made with 💜 by AI NEXUS Team · 2025 하반기 최신 라인업</p>
+            <p style="margin-top: 12px; font-size: 12px;">데이터는 매월 업데이트됩니다 · 최종 업데이트: 2025.11</p>
+        </footer>
+    </div>
+
+    <script>
+        // AI Tools Database - 2025년 최신 라인업
+        const aiTools = [
+            // === 대화형 AI ===
+            {
+                name: 'Claude Sonnet 4.5',
+                icon: '🧠',
+                description: '2025년 최신 Anthropic의 플래그십 모델. 코딩, 분석, 창작에 최적화된 차세대 AI.',
+                category: 'chat',
+                tags: ['코딩', '분석', '창작', '최신'],
+                link: 'https://claude.ai',
+                docs: 'https://docs.anthropic.com'
+            },
+            {
+                name: 'Claude 3.5 Sonnet',
+                icon: '💎',
+                description: 'Anthropic의 이전 세대 고성능 모델. 균형잡힌 속도와 품질.',
+                category: 'chat',
+                tags: ['코딩', '분석'],
+                link: 'https://claude.ai',
+                docs: 'https://docs.anthropic.com'
+            },
+            {
+                name: 'Claude 3.5 Haiku',
+                icon: '⚡',
+                description: '초고속 응답 모델. 실시간 대화와 빠른 작업에 최적화.',
+                category: 'chat',
+                tags: ['속도', '경량'],
+                link: 'https://claude.ai',
+                docs: 'https://docs.anthropic.com'
+            },
+            {
+                name: 'ChatGPT o1-pro',
+                icon: '🤖',
+                description: '2025년 OpenAI 최고급 모델. 복잡한 추론과 문제 해결에 특화.',
+                category: 'chat',
+                tags: ['추론', '코딩', '프리미엄'],
+                link: 'https://chat.openai.com',
+                docs: 'https://platform.openai.com/docs'
+            },
+            {
+                name: 'ChatGPT o1',
+                icon: '🎯',
+                description: 'OpenAI의 고급 추론 모델. 수학, 과학, 코딩에 강력.',
+                category: 'chat',
+                tags: ['추론', '과학', '수학'],
+                link: 'https://chat.openai.com',
+                docs: 'https://platform.openai.com/docs'
+            },
+            {
+                name: 'ChatGPT-4o',
+                icon: '🌟',
+                description: 'OpenAI의 멀티모달 모델. 텍스트, 이미지, 음성을 동시에 처리.',
+                category: 'chat',
+                tags: ['멀티모달', '범용'],
+                link: 'https://chat.openai.com',
+                docs: 'https://platform.openai.com/docs'
+            },
+            {
+                name: 'Gemini 2.5 Pro',
+                icon: '🔷',
+                description: '2025년 Google의 최신 플래그십. 대용량 컨텍스트와 멀티모달 지원.',
+                category: 'chat',
+                tags: ['멀티모달', '대용량', '최신'],
+                link: 'https://gemini.google.com',
+                docs: 'https://ai.google.dev'
+            },
+            {
+                name: 'Gemini 2.0 Flash',
+                icon: '⚡',
+                description: 'Google의 초고속 경량 모델. 실시간 애플리케이션에 최적.',
+                category: 'chat',
+                tags: ['속도', '경량', '실시간'],
+                link: 'https://gemini.google.com',
+                docs: 'https://ai.google.dev'
+            },
+            {
+                name: 'DeepSeek V3',
+                icon: '🧬',
+                description: '중국 DeepSeek의 2025년 최신 모델. 코딩과 수학 추론에 강력.',
+                category: 'chat',
+                tags: ['코딩', '오픈소스', '추론'],
+                link: 'https://chat.deepseek.com',
+                docs: 'https://github.com/deepseek-ai'
+            },
+            {
+                name: 'Qwen 2.5',
+                icon: '🎐',
+                description: 'Alibaba의 최신 오픈소스 모델. 다국어와 코딩 지원 우수.',
+                category: 'chat',
+                tags: ['오픈소스', '다국어', '코딩'],
+                link: 'https://qwenlm.github.io',
+                docs: 'https://github.com/QwenLM'
+            },
+            {
+                name: 'Minimax',
+                icon: '🏮',
+                description: '중국의 혁신적인 멀티모달 AI. 음성, 텍스트, 이미지 통합 처리.',
+                category: 'chat',
+                tags: ['멀티모달', '음성', '중국'],
+                link: 'https://www.minimax.io',
+                docs: 'https://www.minimax.io'
+            },
+
+            // === 이미지 생성 ===
+            {
+                name: 'Midjourney v7',
+                icon: '🎨',
+                description: '2025년 최고의 이미지 생성 AI. 사실적이고 예술적인 이미지 제작.',
+                category: 'image',
+                tags: ['아트', '고품질', '창작'],
+                link: 'https://www.midjourney.com',
+                docs: 'https://docs.midjourney.com'
+            },
+            {
+                name: 'DALL·E 4',
+                icon: '🖼️',
+                description: 'OpenAI의 최신 이미지 생성 모델. ChatGPT와 완벽 통합.',
+                category: 'image',
+                tags: ['통합', '편집', '창작'],
+                link: 'https://openai.com/dall-e',
+                docs: 'https://platform.openai.com/docs'
+            },
+            {
+                name: 'Stable Diffusion 3.5',
+                icon: '🌈',
+                description: '오픈소스 이미지 생성의 표준. 로컬 실행 가능.',
+                category: 'image',
+                tags: ['오픈소스', '로컬', '커스텀'],
+                link: 'https://stability.ai',
+                docs: 'https://github.com/Stability-AI'
+            },
+            {
+                name: 'Imagen 3',
+                icon: '🎭',
+                description: 'Google의 최신 이미지 생성 AI. 텍스트 렌더링에 강력.',
+                category: 'image',
+                tags: ['텍스트', '고품질'],
+                link: 'https://deepmind.google/technologies/imagen-3/',
+                docs: 'https://ai.google.dev'
+            },
+
+            // === 비디오 생성 ===
+            {
+                name: 'Runway Gen-3',
+                icon: '🎬',
+                description: '최첨단 비디오 생성 AI. 텍스트에서 고품질 비디오 제작.',
+                category: 'video',
+                tags: ['비디오', '편집', '고품질'],
+                link: 'https://runwayml.com',
+                docs: 'https://help.runwayml.com'
+            },
+            {
+                name: 'Pika 2.0',
+                icon: '📹',
+                description: '혁신적인 비디오 AI. 간단한 프롬프트로 영화 같은 영상 제작.',
+                category: 'video',
+                tags: ['비디오', '간편', '창작'],
+                link: 'https://pika.art',
+                docs: 'https://pika.art'
+            },
+            {
+                name: 'Sora',
+                icon: '🎥',
+                description: 'OpenAI의 비디오 생성 모델. 1분 이상의 사실적인 영상 생성.',
+                category: 'video',
+                tags: ['장편', '사실성', '최신'],
+                link: 'https://openai.com/sora',
+                docs: 'https://openai.com/sora'
+            },
+
+            // === 음성 AI ===
+            {
+                name: 'ElevenLabs',
+                icon: '🎙️',
+                description: '세계 최고의 음성 합성 AI. 자연스러운 다국어 음성 생성.',
+                category: 'voice',
+                tags: ['음성', '다국어', 'TTS'],
+                link: 'https://elevenlabs.io',
+                docs: 'https://docs.elevenlabs.io'
+            },
+            {
+                name: 'OpenAI TTS',
+                icon: '🔊',
+                description: 'OpenAI의 고품질 음성 합성. ChatGPT 음성 모드 기반.',
+                category: 'voice',
+                tags: ['음성', 'API', 'TTS'],
+                link: 'https://platform.openai.com/docs/guides/text-to-speech',
+                docs: 'https://platform.openai.com/docs'
+            },
+
+            // === 생산성 도구 ===
+            {
+                name: 'Gamma',
+                icon: '📊',
+                description: 'AI 기반 프레젠테이션 생성. 텍스트만으로 완성도 높은 슬라이드 제작.',
+                category: 'productivity',
+                tags: ['프레젠테이션', '문서', '자동화'],
+                link: 'https://gamma.app',
+                docs: 'https://gamma.app'
+            },
+            {
+                name: 'Notion AI',
+                icon: '📝',
+                description: 'Notion 통합 AI. 문서 작성, 요약, 번역을 자동화.',
+                category: 'productivity',
+                tags: ['문서', '노트', '자동화'],
+                link: 'https://www.notion.so/product/ai',
+                docs: 'https://www.notion.so/help/guides/category/notion-ai'
+            },
+            {
+                name: 'Cursor',
+                icon: '⌨️',
+                description: 'AI 페어 프로그래밍 에디터. 코딩 생산성을 10배 향상.',
+                category: 'productivity',
+                tags: ['코딩', '에디터', '생산성'],
+                link: 'https://cursor.sh',
+                docs: 'https://docs.cursor.sh'
+            },
+
+            // === AI 검색 ===
+            {
+                name: 'Perplexity',
+                icon: '🔎',
+                description: '2025년 최고의 AI 검색 엔진. 실시간 정보와 출처 제공.',
+                category: 'search',
+                tags: ['검색', '실시간', '출처'],
+                link: 'https://www.perplexity.ai',
+                docs: 'https://www.perplexity.ai'
+            },
+            {
+                name: 'Gemini Search',
+                icon: '🌐',
+                description: 'Google의 AI 검색. 검색과 대화형 AI의 완벽한 결합.',
+                category: 'search',
+                tags: ['검색', 'Google', '통합'],
+                link: 'https://gemini.google.com',
+                docs: 'https://support.google.com/gemini'
+            },
+        ];
+
+        // DOM Elements
+        const searchInput = document.getElementById('searchInput');
+        const aiGrid = document.getElementById('aiGrid');
+        const noResults = document.getElementById('noResults');
+        const filterPills = document.querySelectorAll('.filter-pill');
+        const totalCount = document.getElementById('totalCount');
+        const visibleCount = document.getElementById('visibleCount');
+
+        let currentFilter = 'all';
+        let currentSearch = '';
+
+        // Initialize
+        function init() {
+            renderCards(aiTools);
+            updateStats(aiTools.length, aiTools.length);
+        }
+
+        // Render Cards
+        function renderCards(tools) {
+            if (tools.length === 0) {
+                aiGrid.innerHTML = '';
+                noResults.classList.add('show');
+                updateStats(aiTools.length, 0);
+                return;
+            }
+
+            noResults.classList.remove('show');
+            aiGrid.innerHTML = tools.map((tool, index) => `
+                <div class="card" style="animation-delay: ${index * 0.05}s">
+                    <div class="category-badge">${getCategoryName(tool.category)}</div>
+                    <div class="card-header">
+                        <div class="card-icon">${tool.icon}</div>
+                        <h3 class="card-title">${tool.name}</h3>
+                    </div>
+                    <p class="card-description">${tool.description}</p>
+                    <div class="card-tags">
+                        ${tool.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                    </div>
+                    <div class="card-footer">
+                        <a href="${tool.link}" target="_blank" class="btn">방문하기</a>
+                        ${tool.docs ? `<a href="${tool.docs}" target="_blank" class="btn btn-secondary">문서</a>` : ''}
+                    </div>
+                </div>
+            `).join('');
+            updateStats(aiTools.length, tools.length);
+        }
+
+        // Get Category Name in Korean
+        function getCategoryName(category) {
+            const names = {
+                'chat': '대화형',
+                'image': '이미지',
+                'video': '비디오',
+                'voice': '음성',
+                'productivity': '생산성',
+                'search': '검색'
+            };
+            return names[category] || category;
+        }
+
+        // Filter Logic
+        function filterTools() {
+            let filtered = aiTools;
+
+            // Category filter
+            if (currentFilter !== 'all') {
+                filtered = filtered.filter(tool => tool.category === currentFilter);
+            }
+
+            // Search filter
+            if (currentSearch) {
+                const search = currentSearch.toLowerCase();
+                filtered = filtered.filter(tool =>
+                    tool.name.toLowerCase().includes(search) ||
+                    tool.description.toLowerCase().includes(search) ||
+                    tool.tags.some(tag => tag.toLowerCase().includes(search))
+                );
+            }
+
+            renderCards(filtered);
+        }
+
+        // Update Stats
+        function updateStats(total, visible) {
+            totalCount.textContent = total;
+            visibleCount.textContent = visible;
+        }
+
+        // Event Listeners
+        searchInput.addEventListener('input', (e) => {
+            currentSearch = e.target.value;
+            filterTools();
+        });
+
+        filterPills.forEach(pill => {
+            pill.addEventListener('click', () => {
+                // Update active state
+                filterPills.forEach(p => p.classList.remove('active'));
+                pill.classList.add('active');
+
+                // Update filter
+                currentFilter = pill.dataset.category;
+                filterTools();
+            });
+        });
+
+        // Prevent card click when clicking buttons
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('btn')) {
+                e.stopPropagation();
+            }
+        });
+
+        // Initialize on load
+        init();
+    </script>
+</body>
+</html>
