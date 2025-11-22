@@ -603,7 +603,7 @@
 
         // Search filter
         searchInput.addEventListener('input', (e) => {
-            const query = e.target.value.toLowerCase();
+            const query = e.target.value.toLowerCase().trim();
             const allTools = [
                 ...tools.superAgents,
                 ...tools.visualEngines,
@@ -625,18 +625,14 @@
                 return nameMatch || descMatch || keywordMatch;
             });
 
-            // Render filtered results
-            const sections = {
-                superAgents: filtered.filter(t => tools.superAgents.includes(t)),
-                visualEngines: filtered.filter(t => tools.visualEngines.includes(t)),
-                deepResearch: filtered.filter(t => tools.deepResearch.includes(t)),
-                foundationModels: filtered.filter(t => tools.foundationModels.includes(t))
-            };
+            console.log('Search query:', query);
+            console.log('Filtered results:', filtered.length, filtered.map(t => t.name));
 
-            renderCards('superAgents', sections.superAgents);
-            renderCards('visualEngines', sections.visualEngines);
-            renderCards('deepResearch', sections.deepResearch);
-            renderCards('foundationModels', sections.foundationModels);
+            // Render filtered results to each section
+            renderCards('superAgents', filtered.filter(t => tools.superAgents.includes(t)));
+            renderCards('visualEngines', filtered.filter(t => tools.visualEngines.includes(t)));
+            renderCards('deepResearch', filtered.filter(t => tools.deepResearch.includes(t)));
+            renderCards('foundationModels', filtered.filter(t => tools.foundationModels.includes(t)));
         });
 
         // Render all cards
